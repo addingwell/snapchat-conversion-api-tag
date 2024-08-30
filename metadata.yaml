@@ -1,0 +1,4 @@
+homepage: "https://addingwell.com"
+versions:
+  - sha: 40c5796c03f140528ef782548bfdf15537e3a58a
+    changeNotes: Initial release.
