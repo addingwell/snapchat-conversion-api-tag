@@ -13,7 +13,7 @@ ___INFO___
   "id": "cvt_temp_public_id",
   "version": 1,
   "securityGroups": [],
-  "displayName": "Snapchat Conversion API",
+  "displayName": "Snapchat Conversion API by Addingwell",
   "brand": {
     "id": "brand_dummy",
     "displayName": "Addingwell",
