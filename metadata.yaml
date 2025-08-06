@@ -1,6 +1,6 @@
 homepage: "https://addingwell.com"
 versions:
-  - sha: 5aeed0532654f64a6479ffe8f814c5b3e6d351b2
+  - sha: 6ae76da369fd1b843959010caa21a2680594992d
     changeNotes: Add documentation + fixes
   - sha: f06a642253c3df4504f0d9e475fcdadfc7fda61a
     changeNotes: Update Template Name
