@@ -813,7 +813,9 @@ function getItemField(defaultField) {
     item_id: 'item_id',
     price: 'price',
     quantity: 'quantity',
-    item_category: 'item_category'
+    item_category: 'item_category',
+    item_name: 'item_name',
+    item_brand: 'item_brand'
   };
 
   if (data.itemDataList) {
