@@ -1,6 +1,8 @@
 homepage: "https://addingwell.com"
 documentation: https://docs.addingwell.com/en/snapchat-capi/benefits
 versions:
+  - sha: 6ae76da369fd1b843959010caa21a2680594992d
+    changeNotes: Add documentation + fixes
   - sha: f06a642253c3df4504f0d9e475fcdadfc7fda61a
     changeNotes: Update Template Name
   - sha: 4b79b1c1041e2969a35ba50b818cfed51277d895

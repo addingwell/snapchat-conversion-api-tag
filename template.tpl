@@ -30,6 +30,11 @@ ___TEMPLATE_PARAMETERS___
 
 [
   {
+    "type": "LABEL",
+    "name": "documentation",
+    "displayName": "This tag translates standard GA4 event data into Snapchat event formats and sends it to the Snapchat Conversion API. For detailed setup instructions, please refer to the \u003ca href\u003d\"https://docs.addingwell.com/en/snapchat-capi/tag-setup\"\u003eAddingwell documentation\u003c/a\u003e.\u003cbr\u003e\u003cbr\u003e"
+  },
+  {
     "type": "SELECT",
     "name": "inheritEventName",
     "displayName": "Event Name Setup Method",
@@ -212,25 +217,41 @@ ___TEMPLATE_PARAMETERS___
         ]
       }
     ],
-    "defaultValue": "inherit"
+    "defaultValue": "inherit",
+    "help": "2 options: \u003cul\u003e\u003cli\u003e\u003cb\u003eInherit from client\u003c/b\u003e: automatic mapping between GA4 event names and Snapchat standard events.\u003c/li\u003e \u003cli\u003e\u003cb\u003eOverride\u003c/b\u003e: manually set which event you want to send to Snapchat whatever the GA4 event name is.\u003c/li\u003e \u003c/ul\u003e \u003ca href\u003d\"https://docs.addingwell.com/en/snapchat-capi/tag-setup\"\u003eLearn more\u003c/a\u003e"
   },
   {
     "type": "TEXT",
     "name": "accessToken",
     "displayName": "Access Token",
-    "simpleValueType": true
+    "simpleValueType": true,
+    "help": "Snapchat Conversion API access token is available in Snapchat Business Manager. \u003ca href\u003d\"https://docs.addingwell.com/en/snapchat-capi/find-snapchat-conversion-api-access-token\"\u003eLearn more\u003c/a\u003e",
+    "valueValidators": [
+      {
+        "type": "NON_EMPTY"
+      }
+    ],
+    "valueHint": "eyJhbGciOiJIUzI1NiIsImtpZCI6IkNh"
   },
   {
     "type": "TEXT",
     "name": "pixelId",
     "displayName": "Pixel ID",
-    "simpleValueType": true
+    "simpleValueType": true,
+    "help": "Snapchat Pixel ID is available in Snapchat Events Manager. \u003ca href\u003d\"https://docs.addingwell.com/en/snapchat-capi/find-snap-pixel-id\"\u003eLearn more\u003c/a\u003e",
+    "valueValidators": [
+      {
+        "type": "NON_EMPTY"
+      }
+    ],
+    "valueHint": "b17824d6-bdd6-57f9-6e7a-571cdcd6633b"
   },
   {
     "type": "CHECKBOX",
     "name": "testEvents",
     "checkboxText": "Test Events",
-    "simpleValueType": true
+    "simpleValueType": true,
+    "help": "If you check this checkbox, the tag will add \u003cb\u003e/validate\u003c/b\u003e to every event request so that the events appear in Snapchat \u003cb\u003eTest Events\u003c/b\u003e section in the \u003cb\u003eEvents Manager\u003c/b\u003e. \u003ca href\u003d\"https://businesshelp.snapchat.com/s/article/capi-event-testing\"\u003eLearn more\u003c/a\u003e"
   },
   {
     "type": "GROUP",
@@ -258,7 +279,7 @@ ___TEMPLATE_PARAMETERS___
               },
               {
                 "value": "event_source_url",
-                "displayValue": "Source URL"
+                "displayValue": "Event Source URL"
               },
               {
                 "value": "event_id",
@@ -278,7 +299,9 @@ ___TEMPLATE_PARAMETERS___
             ]
           }
         ],
-        "newRowButtonText": "Add Property"
+        "newRowButtonText": "Add Property",
+        "displayName": "Server event data",
+        "help": "List of server event data:\n\u003cul\u003e\n\t\u003cli\u003e\u003cb\u003eAction Source\u003c/b\u003e: Where the event took place. Required for all web and app events. Use the appropriate value accordingly.\n\t\t\u003cul\u003e\n\t\t\t\u003cli\u003e\u003cb\u003eWEB\u003c/b\u003e: From a website.\u003c/li\u003e\n\t\t\t\u003cli\u003e\u003cb\u003eMOBILE_APP\u003c/b\u003e: From a mobile app.\u003c/li\u003e\n\t\t\t\u003cli\u003e\u003cb\u003eOFFLINE\u003c/b\u003e: From a physical store.\u003c/li\u003e\n\t\t\u003c/ul\u003e\n\t\t(default: \u003cb\u003eWEB\u003c/b\u003e)\n\t\u003c/li\u003e\n\t\u003cli\u003e\u003cb\u003eEvent Time\u003c/b\u003e: The Epoch timestamp for the conversion happening. We can handle second level or millisecond level granularity. However, we do encourage requests to provide millisecond level granularity. (default: getTimestampMillis())\u003c/li\u003e\n\t\u003cli\u003e\u003cb\u003eEvent Source URL\u003c/b\u003e: The URL of the web page where the event took place. Must include protocol (eg http, https). (default: eventData.page_location)\u003c/li\u003e\n\t\u003cli\u003e\u003cb\u003eEvent ID\u003c/b\u003e: This field represents a unique identifier chosen by the advertiser to represent an event. (default: eventData.event_id)\u003c/li\u003e\n\u003c/ul\u003e \u003ca href\u003d\"https://developers.snap.com/api/marketing-api/Conversions-API/Parameters#server-parameters\"\u003eLearn more\u003c/a\u003e"
       }
     ]
   },
@@ -291,7 +314,7 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "SIMPLE_TABLE",
         "name": "userDataList",
-        "displayName": "",
+        "displayName": "User data",
         "simpleTableColumns": [
           {
             "defaultValue": "em",
@@ -366,7 +389,8 @@ ___TEMPLATE_PARAMETERS___
             ]
           }
         ],
-        "newRowButtonText": "Add property"
+        "newRowButtonText": "Add property",
+        "help": "List of user data (If you send it hashed the tag will forward it, if you send it plain the tag will hash it (if required) before sending it to Snapchat Conversion API) :\n\u003cul\u003e\n\t\u003cli\u003e\u003cb\u003eEmail\u003c/b\u003e: (default: eventData.user_data.email_address or eventData.user_data.email) \u003c/li\u003e\n\t\u003cli\u003e\u003cb\u003ePhone Number\u003c/b\u003e: (default: eventData.user_data.phone_number)\u003c/li\u003e\n\t\u003cli\u003e\u003cb\u003eFirst Name\u003c/b\u003e: (default: eventData.user_data.address.first_name or eventData.user_data.address.0.first_name)\u003c/li\u003e\n\t\u003cli\u003e\u003cb\u003eLast Name\u003c/b\u003e: (default: eventData.user_data.address.last_name or eventData.user_data.address.0.last_name)\u003c/li\u003e\n\t\u003cli\u003e\u003cb\u003eGender\u003c/b\u003e: \u003cb\u003ef\u003c/b\u003e for female and \u003cb\u003em\u003c/b\u003e for male. (default: eventData.user_data.gender)\u003c/li\u003e\n\t\u003cli\u003e\u003cb\u003eCity\u003c/b\u003e: City associated with the conversion. (default: eventData.user_data.address.city or eventData.user_data.address.0.city)\u003c/li\u003e\n\t\u003cli\u003e\u003cb\u003eState\u003c/b\u003e: State associated with the conversion. (default: eventData.user_data.address.state or eventData.user_data.address.0.state)\u003c/li\u003e\n\t\u003cli\u003e\u003cb\u003ePostal Code\u003c/b\u003e: Zip or postal code. (default: eventData.user_data.address.postal_code or eventData.user_data.address.0.postal_code)\u003c/li\u003e\n\t\u003cli\u003e\u003cb\u003eCountry\u003c/b\u003e: Country associated with the event. (default: eventData.user_data.address.country or eventData.user_data.address.0.country)\u003c/li\u003e\n\t\u003cli\u003e\u003cb\u003eClient IP Address\u003c/b\u003e: IP Address of the device (not server). (default: eventData.ip_override or headers.x-forwared-for or headers.forwarded)\u003c/li\u003e\n\t\u003cli\u003e\u003cb\u003eExternal ID\u003c/b\u003e: A unique ID such as a loyalty card ID, first party cookie identifier, or some other identifier. (default: eventData.user_id)\u003c/li\u003e\n\t\u003cli\u003e\u003cb\u003eSubscription ID\u003c/b\u003e: The subscription ID for the user who generated this event. (No default)\u003c/li\u003e\n\t\u003cli\u003e\u003cb\u003eLead ID\u003c/b\u003e: This is the identifier associated with your Snapchat Lead Ad (No default)\u003c/li\u003e\n\u003c/ul\u003e \u003ca href\u003d\"https://developers.snap.com/api/marketing-api/Conversions-API/Parameters#user-data-parameters\"\u003eLearn more\u003c/a\u003e"
       }
     ]
   },
@@ -403,7 +427,9 @@ ___TEMPLATE_PARAMETERS___
             ]
           }
         ],
-        "newRowButtonText": "Add Property"
+        "newRowButtonText": "Add Property",
+        "displayName": "Custom data",
+        "help": "List of custom data parameters (you can also add other parameters which will be sent through \u003ci\u003ecustom_data.custom_fields\u003c/i\u003e):\n\u003cul\u003e\n  \u003cli\u003e\u003cb\u003econtent_category\u003c/b\u003e: Item or Category. Can be a single category or an array. (default: eventData.items.0.item_category)\u003c/li\u003e\n  \u003cli\u003e\u003cb\u003econtents\u003c/b\u003e: This field represents item purchases in the form of a list of JSON objects. (default: fields in eventData.items)\u003c/li\u003e\n  \u003cli\u003e\u003cb\u003econtent_ids\u003c/b\u003e: e.g. [\"sku001”,”sku002”,”sku003\"] (default: eventData.items.X.item_id)\u003c/li\u003e\n  \u003cli\u003e\u003cb\u003econtent_type\u003c/b\u003e : Choose \"product\" for individual items or \"product_group\" for items that have multiple options in either size, color or any other variation. (No default)\u003c/li\u003e\n  \u003cli\u003e\u003cb\u003ecurrency\u003c/b\u003e: This represents the currency associated with the value provided. (default: eventData.currency)\u003c/li\u003e\n  \u003cli\u003e\u003cb\u003enum_items\u003c/b\u003e: This indicates the total number of items (default: eventData.items.length)\u003c/li\u003e\n  \u003cli\u003e\u003cb\u003eorder_id\u003c/b\u003e: This is the id representative of the order (default: eventData.transaction_id)\u003c/li\u003e\n  \u003cli\u003e\u003cb\u003epredicted_ltv\u003c/b\u003e: This is the predicted lifetime value of a conversion event (default: eventData.customer_lifetime_value)\u003c/li\u003e\n  \u003cli\u003e\u003cb\u003evalue\u003c/b\u003e: This numeric value is associated with the specific event. (default: eventData.value)\u003c/li\u003e\n  \u003cli\u003e\u003cb\u003esearch_string\u003c/b\u003e: The text that was searched for (default: eventData.search_term)\u003c/li\u003e\n\u003c/ul\u003e\n\u003ca href\u003d\"https://developers.snap.com/api/marketing-api/Conversions-API/Parameters#custom-data-parameters\"\u003eGet full list here\u003c/a\u003e"
       }
     ]
   },
@@ -416,17 +442,17 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "SIMPLE_TABLE",
         "name": "itemDataList",
-        "displayName": "Update default Item fiels",
+        "displayName": "Update default item field",
         "simpleTableColumns": [
           {
-            "defaultValue": "id",
+            "defaultValue": "item_id",
             "displayName": "Property Name",
             "name": "name",
             "type": "SELECT",
             "selectItems": [
               {
-                "value": "id",
-                "displayValue": "id"
+                "value": "item_id",
+                "displayValue": "item_id"
               },
               {
                 "value": "quantity",
@@ -439,6 +465,14 @@ ___TEMPLATE_PARAMETERS___
               {
                 "value": "item_category",
                 "displayValue": "item_category"
+              },
+              {
+                "value": "item_name",
+                "displayValue": "item_name"
+              },
+              {
+                "value": "item_brand",
+                "displayValue": "item_brand"
               }
             ],
             "isUnique": true
@@ -455,7 +489,8 @@ ___TEMPLATE_PARAMETERS___
             ]
           }
         ],
-        "newRowButtonText": "Add Property"
+        "newRowButtonText": "Add Property",
+        "help": "Override the field name this tag will look for in the GA4 \u003cb\u003eeventData.items\u003c/b\u003e array. (e.g. if Property Name \u003d \u003ci\u003eitem_id\u003c/i\u003e and Property Field \u003d \u003ci\u003eitem_variant_id\u003c/i\u003e the tag will use \u003ci\u003eitem_variant_id\u003c/i\u003e as item ID to fill \u003cb\u003econtents\u003c/b\u003e and \u003cb\u003econtent_ids\u003c/b\u003e arrays)"
       }
     ]
   }
@@ -481,6 +516,7 @@ const parseUrl = require('parseUrl');
 const setCookie = require('setCookie');
 const getType = require('getType');
 const generateRandom = require('generateRandom');
+const makeNumber = require('makeNumber');
 const browserId = getBrowserId();
 const makeString = require('makeString');
 const api_version = 'v3';
@@ -509,7 +545,7 @@ var body = {
   data: [{
       integration: "addingwell-sgtm-tag",
       event_name: getSnapchatEventName(),
-      event_time: Math.round(getTimestampMillis() / 1000),
+      event_time: getTimestampMillis(),
       event_id: eventData.event_id,
       action_source: "WEB",
       event_source_url: eventData.page_location,
@@ -604,6 +640,7 @@ function getUserDataParameters() {
     zp: undefined,
     country: undefined,
     client_ip_address: eventData.ip_override || getRemoteAddress(),
+    external_id: hashData(eventData.user_id),
     client_user_agent: eventData.user_agent,
     sc_click_id: getClickId(),
     sc_cookie1: browserId,
@@ -726,12 +763,12 @@ function getContents() {
     contents = [];
     eventData.items.forEach((item) => {
       contents.push({
-        price: item.price,
-        quantity: item.quantity,
+        price: item[getItemField('price')],
+        quantity: item[getItemField('quantity')],
         content_id: item[getItemField('item_id')],
         content_category: item[getItemField('item_category')],
-        content_name: item.item_name,
-        brand: item.item_brand
+        content_name: item[getItemField('item_name')],
+        brand: item[getItemField('item_brand')]
       });
     });
   }
@@ -773,10 +810,12 @@ function getItemField(defaultField) {
   let result = defaultField;
 
   const map = {
-    item_id: 'id',
-    price: 'item_price',
+    item_id: 'item_id',
+    price: 'price',
     quantity: 'quantity',
-    item_category: 'item_category'
+    item_category: 'item_category',
+    item_name: 'item_name',
+    item_brand: 'item_brand'
   };
 
   if (data.itemDataList) {
@@ -802,8 +841,8 @@ function getCustomDataParameters(){
     currency: eventData.currency,
     num_items: eventData.items ? eventData.items.length : undefined,
     order_id: eventData.transaction_id,
-    predicted_ltv: eventData.customer_lifetime_value,
-    value: eventData.value,
+    predicted_ltv: eventData.customer_lifetime_value ? makeNumber(eventData.customer_lifetime_value) : undefined,
+    value: eventData.value ? makeNumber(eventData.value) : undefined,
     search_string: eventData.search_term,
     
     //Dynamic Travel Ads Parameters
@@ -829,13 +868,26 @@ function getCustomDataParameters(){
     preferred_neighborhoods: eventData.preferred_neighborhoods,
     preferred_star_ratings: eventData.preferred_star_ratings,
     suggested_hotels: eventData.suggested_hotels,
-    destination_ids: eventData.destination_ids
-
+    destination_ids: eventData.destination_ids,
+    
+    //Other
+    status: getStatus(),
+    event_tag: eventData.event_tag
   };
   
   if (data.customDataList) {
     data.customDataList.forEach(d => {
-      custom_data[d.name] = d.value;
+      if(custom_data[d.name]) {
+        custom_data[d.name] = d.value;
+      } else {
+        if(custom_data.custom_fields) {
+          custom_data.custom_fields[d.name] = d.value;
+        } else {
+          custom_data.custom_fields = {};
+          custom_data.custom_fields[d.name] = d.value;
+        }
+        
+      }
     });
   }
   
@@ -843,6 +895,20 @@ function getCustomDataParameters(){
   
   return custom_data;
   
+}
+
+function getStatus() {
+  let status;
+  
+  if(eventData.new_customer) {
+    if(eventData.new_customer == "true") {
+      status = "new";  
+    } else {
+      status = "returning";
+    }
+  }
+  
+  return status;
 }
 
 function getClickId() {
