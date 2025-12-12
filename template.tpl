@@ -571,7 +571,7 @@ if(clickId) {
       samesite: 'Lax',
       secure: true,
       'max-age': 7776000,
-      httpOnly: false
+      httpOnly: true
     }
   );
 }
@@ -586,37 +586,7 @@ if(browserId) {
       samesite: 'Lax',
       secure: true,
       'max-age': 7776000,
-      httpOnly: false
-    }
-  );
-}
-
-if(getCookieValues('_scclid')[0] && !getCookieValues('FPSCCLID')[0]) {
-  setCookie(
-    'FPSCCLID',
-    getCookieValues('_scclid')[0], 
-    {
-      domain: 'auto',
-      path: '/',
-      samesite: 'Lax',
-      secure: true,
-      'max-age': 7776000,
-      httpOnly: false
-    }
-  );
-}
-
-if(getCookieValues('_scid')[0] && !getCookieValues('FPSCID')[0]) {
-    setCookie(
-    'FPSCID',
-    getCookieValues('_scid')[0],
-    {
-      domain: 'auto',
-      path: '/',
-      samesite: 'Lax',
-      secure: true,
-      'max-age': 7776000,
-      httpOnly: false
+      httpOnly: true
     }
   );
 }
