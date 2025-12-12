@@ -1,6 +1,8 @@
 homepage: "https://addingwell.com"
 documentation: https://docs.addingwell.com/en/snapchat-capi/benefits
 versions:
+  - sha: fa1e10f1e23092f9945a3687b04f3e692a78dac8
+    changeNotes: Fix cookies management
   - sha: feca51270e8f521594dd29d777980572375c0004
     changeNotes: fix fp cookies
   - sha: 6ae76da369fd1b843959010caa21a2680594992d
